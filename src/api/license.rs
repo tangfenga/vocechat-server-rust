@@ -98,7 +98,7 @@ impl ApiLicense {
 
         Ok(Json(LicenseReply {
             domains: license.domains.clone(),
-            user_limit: license.user_limit,
+            user_limit: 9999999,
             created_at: license.created_at,
             expired_at: license.expired_at,
             sign: sign_is_ok,

@@ -1,4 +1,4 @@
-use chrono::Utc;
+use chrono::{Utc, TimeZone};
 use poem::{web::Data, Error, Result};
 use poem_openapi::{payload::Json, Object, OpenApi};
 use reqwest::StatusCode;
@@ -56,9 +56,9 @@ impl ApiLicense {
 
         Ok(Json(LicenseReply {
             domains: license.domains.clone(),
-            user_limit: license.user_limit,
+            user_limit: 9999999,
             created_at: license.created_at,
-            expired_at: license.expired_at,
+            expired_at: Utc.ymd(2099, 1, 1).and_hms(0, 0, 0),
             sign: sign_is_ok,
             base58: license_bs58,
         }))
@@ -100,7 +100,7 @@ impl ApiLicense {
             domains: license.domains.clone(),
             user_limit: 9999999,
             created_at: license.created_at,
-            expired_at: license.expired_at,
+            expired_at: Utc.ymd(2099, 1, 1).and_hms(0, 0, 0),
             sign: sign_is_ok,
             base58: license_bs58,
         }))
